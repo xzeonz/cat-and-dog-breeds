@@ -9,11 +9,11 @@
 
 # UJI COBA
 
-fastapi==0.100.0
-uvicorn==0.23.2
-torch==2.0.1
-torchvision==0.15.2
-Pillow==10.0.0
-pandas==2.0.3
-requests==2.31.0
-huggingface_hub==0.17.3 # Tambahkan ini. Sesuaikan versi jika perlu.
+fastapi
+uvicorn
+torch
+torchvision
+Pillow
+pandas
+requests
+huggingface_hub
