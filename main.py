@@ -24,7 +24,8 @@ app.add_middleware(
 
 # --- Configuration and Initialization ---
 MODEL_PATH = "./best_model.pth"
-BREED_DESCRIPTIONS_URL = "https://docs.google.com/spreadsheets/d/1v9o-KPbQUnaWb9qK2hZfAHgOLrve4BKx1k30RUIYM3M/export?format=csv"
+# BREED_DESCRIPTIONS_URL = "https://docs.google.com/spreadsheets/d/1v9o-KPbQUnaWb9qK2hZfAHgOLrve4BKx1k30RUIYM3M/export?format=csv"
+BREED_DESCRIPTIONS_URL = "./description.csv"
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -33,15 +34,15 @@ NUM_CLASSES = 55
 model = None
 class_names = [
     'Abyssinian', 'Alaskan Malamute', 'American Bobtail', 'American Shorhair', 'American bulldog',
-    'American_pit_bull_terrier', 'Basset_hound', 'Beagle', 'Bengal', 'Birman', 'Bombay', 'Boxer',
-    'British_shorthair', 'Bulldog', 'Calico', 'Chihuahua', 'Dachshund', 'Egyptian_mau',
-    'English_cocker_paniel', 'English_setter', 'German_Shepherd', 'German_shorthairaired',
-    'Golden_Retreiver', 'Great_pyrenees', 'Havanese', 'Husky', 'Japanese chin', 'Keeshond',
-    'Labrador_Retriever', 'Leonberger', 'Maine_coon', 'Miniature_pinscher', 'Munchkin',
-    'Newfoundland', 'Norwegian_Forest_Cat', 'Ocicat', 'Persian', 'Pomeranian', 'Poodle', 'Pug',
-    'Ragdoll', 'Rottweiler', 'Russian_blue', 'Saint_bernard', 'Samoyed', 'Scottish_Fold',
-    'Scottish_terrier', 'Shiba_inu', 'Siamese', 'Sphynx', 'Staffordshire_bull_terrier',
-    'Tortoiseshell', 'Tuxedo', 'Wheaten_tersier', 'Yorkshire_terrier'
+    'American pit bull terrier', 'Basset hound', 'Beagle', 'Bengal', 'Birman', 'Bombay', 'Boxer',
+    'British shorthair', 'Bulldog', 'Calico', 'Chihuahua', 'Dachshund', 'Egyptian mau',
+    'English cocker paniel', 'English setter', 'German Shepherd', 'German shorthairaired',
+    'Golden Retreiver', 'Great pyrenees', 'Havanese', 'Husky', 'Japanese chin', 'Keeshond',
+    'Labrador Retriever', 'Leonberger', 'Maine coon', 'Miniature pinscher', 'Munchkin',
+    'Newfoundland', 'Norwegian Forest Cat', 'Ocicat', 'Persian', 'Pomeranian', 'Poodle', 'Pug',
+    'Ragdoll', 'Rottweiler', 'Russian blue', 'Saint bernard', 'Samoyed', 'Scottish Fold',
+    'Scottish terrier', 'Shiba inu', 'Siamese', 'Sphynx', 'Staffordshire bull terrier',
+    'Tortoiseshell', 'Tuxedo', 'Wheaten tersier', 'Yorkshire terrier'
 ]
 
 breed_descriptions_df = pd.DataFrame()
@@ -81,11 +82,11 @@ def load_model():
 def load_breed_descriptions():
     global breed_descriptions_df
     try:
-        response = requests.get(BREED_DESCRIPTIONS_URL)
-        response.raise_for_status()
-        from io import StringIO
-        csv_data = StringIO(response.text)
-        breed_descriptions_df = pd.read_csv(csv_data)
+        # response = requests.get(BREED_DESCRIPTIONS_URL)
+        # response.raise_for_status()
+        # from io import StringIO
+        # csv_data = StringIO(response.text)
+        breed_descriptions_df = pd.read_csv(BREED_DESCRIPTIONS_URL, header=None, encoding='utf-8')
         print("Loaded breed descriptions with columns:", breed_descriptions_df.columns.tolist())
     except Exception as e:
         print(f"Error loading breed descriptions: {e}")
